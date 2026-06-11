@@ -1,4 +1,4 @@
-const CACHE_NAME = "tetromino-pocket-v4";
+const CACHE_NAME = "tetromino-pocket-v5";
 const ASSETS = [
   "./",
   "index.html",
