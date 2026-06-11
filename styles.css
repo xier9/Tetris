@@ -226,7 +226,13 @@ h1 {
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.control-bank {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: 48px;
   gap: 8px;
 }
@@ -260,7 +266,7 @@ h1 {
     padding-inline: 18px;
   }
 
-  .controls {
+  .control-bank {
     grid-auto-rows: 54px;
   }
 }
@@ -278,7 +284,7 @@ h1 {
     width: min(100%, calc((100dvh - 206px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) / 2));
   }
 
-  .controls {
+  .control-bank {
     grid-auto-rows: 42px;
   }
 }

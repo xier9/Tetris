@@ -67,14 +67,18 @@
       </section>
 
       <section class="controls" aria-label="觸控操作">
-        <button class="control" id="leftBtn" type="button" aria-label="左移">←</button>
-        <button class="control" id="rotateBtn" type="button" aria-label="旋轉">↻</button>
-        <button class="control" id="rightBtn" type="button" aria-label="右移">→</button>
-        <button class="control tall" id="dropBtn" type="button" aria-label="瞬間落下">DROP</button>
-        <button class="control" id="holdBtn" type="button" aria-label="保留">HOLD</button>
-        <button class="control" id="downBtn" type="button" aria-label="加速下落">↓</button>
-        <button class="control" id="pauseBtn" type="button" aria-label="暫停">PAUSE</button>
-        <button class="control" id="restartBtn" type="button" aria-label="重新開始">NEW</button>
+        <div class="control-bank function-bank" aria-label="左手功能鍵">
+          <button class="control tall" id="dropBtn" type="button" aria-label="瞬間落下">DROP</button>
+          <button class="control" id="rotateBtn" type="button" aria-label="旋轉">↻</button>
+          <button class="control" id="holdBtn" type="button" aria-label="保留">HOLD</button>
+          <button class="control" id="restartBtn" type="button" aria-label="重新開始">NEW</button>
+        </div>
+        <div class="control-bank direction-bank" aria-label="右手方向鍵">
+          <button class="control" id="leftBtn" type="button" aria-label="左移">←</button>
+          <button class="control" id="rightBtn" type="button" aria-label="右移">→</button>
+          <button class="control" id="downBtn" type="button" aria-label="加速下落">↓</button>
+          <button class="control" id="pauseBtn" type="button" aria-label="暫停">PAUSE</button>
+        </div>
       </section>
     </main>
 
