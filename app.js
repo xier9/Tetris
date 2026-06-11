@@ -2,6 +2,9 @@ const COLS = 10;
 const ROWS = 20;
 const PREVIEW_COUNT = 3;
 const STORAGE_KEY = "tetromino-pocket-best";
+const RANKING_KEY = "tetromino-pocket-rankings";
+const MAX_RANKINGS = 50;
+const VISIBLE_RANKINGS = 5;
 
 const COLORS = {
   I: "#25d0ff",
@@ -64,6 +67,7 @@ const linesEl = document.querySelector("#lines");
 const overlay = document.querySelector("#overlay");
 const overlayTitle = document.querySelector("#overlayTitle");
 const overlayHint = document.querySelector("#overlayHint");
+const rankingPanel = document.querySelector("#rankingPanel");
 
 const buttons = {
   left: document.querySelector("#leftBtn"),
@@ -396,9 +400,10 @@ function togglePause(force) {
 function finishGame() {
   state.running = false;
   state.gameOver = true;
+  const result = saveRanking(state.score, state.level);
   updateHud();
   draw();
-  showOverlay("遊戲結束", "點一下重新開始");
+  showOverlay("遊戲結束", "點一下重新開始", result.id);
 }
 
 function canPlay() {
@@ -414,6 +419,89 @@ function updateHud() {
 
 function formatNumber(value) {
   return new Intl.NumberFormat("zh-Hant").format(value);
+}
+
+function loadRankings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(RANKING_KEY) || "[]");
+    if (!Array.isArray(saved)) return [];
+    return saved
+      .filter((entry) => Number.isFinite(entry.score) && Number.isFinite(entry.level))
+      .map((entry) => ({
+        id: String(entry.id || createRankingId()),
+        score: Math.max(0, Math.floor(entry.score)),
+        level: Math.max(1, Math.floor(entry.level)),
+        createdAt: Number(entry.createdAt) || Date.now(),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+function saveRanking(score, level) {
+  const entry = {
+    id: createRankingId(),
+    score: Math.max(0, Math.floor(score)),
+    level: Math.max(1, Math.floor(level)),
+    createdAt: Date.now(),
+  };
+  const rankings = sortRankings([...loadRankings(), entry]).slice(0, MAX_RANKINGS);
+  localStorage.setItem(RANKING_KEY, JSON.stringify(rankings));
+  return entry;
+}
+
+function createRankingId() {
+  if (crypto.randomUUID) return crypto.randomUUID();
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function sortRankings(rankings) {
+  return rankings.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    if (b.level !== a.level) return b.level - a.level;
+    return a.createdAt - b.createdAt;
+  });
+}
+
+function renderRankings(currentId) {
+  const rankings = sortRankings(loadRankings());
+  rankingPanel.replaceChildren();
+
+  const title = document.createElement("div");
+  title.className = "ranking-title";
+  title.textContent = "個人成績排名";
+  rankingPanel.append(title);
+
+  const table = document.createElement("table");
+  table.className = "ranking-table";
+  table.innerHTML = "<thead><tr><th>名次</th><th>分數</th><th>等級</th></tr></thead>";
+
+  const body = document.createElement("tbody");
+  const currentIndex = rankings.findIndex((entry) => entry.id === currentId);
+  const visibleEntries =
+    currentIndex >= VISIBLE_RANKINGS
+      ? [...rankings.slice(0, VISIBLE_RANKINGS - 1), rankings[currentIndex]]
+      : rankings.slice(0, VISIBLE_RANKINGS);
+
+  visibleEntries.forEach((entry) => {
+    const rank = rankings.findIndex((rankedEntry) => rankedEntry.id === entry.id) + 1;
+    const row = document.createElement("tr");
+    if (entry.id === currentId) row.className = "is-current";
+
+    const rankCell = document.createElement("td");
+    rankCell.textContent = String(rank);
+    const scoreCell = document.createElement("td");
+    scoreCell.textContent = formatNumber(entry.score);
+    const levelCell = document.createElement("td");
+    levelCell.textContent = String(entry.level);
+
+    row.append(rankCell, scoreCell, levelCell);
+    body.append(row);
+  });
+
+  table.append(body);
+  rankingPanel.append(table);
+  rankingPanel.hidden = false;
 }
 
 function resizeCanvases() {
@@ -544,9 +632,15 @@ function getGhostPiece() {
   return ghost;
 }
 
-function showOverlay(title, hint) {
+function showOverlay(title, hint, rankingId = null) {
   overlayTitle.textContent = title;
   overlayHint.textContent = hint;
+  if (rankingId) {
+    renderRankings(rankingId);
+  } else {
+    rankingPanel.hidden = true;
+    rankingPanel.replaceChildren();
+  }
   overlay.classList.remove("hidden");
 }
 

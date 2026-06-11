@@ -199,9 +199,9 @@ h1 {
 }
 
 .overlay-copy {
-  width: min(100%, 220px);
+  width: min(100%, 238px);
   border-radius: 8px;
-  padding: 16px 14px;
+  padding: 14px 12px;
   background: rgba(13, 17, 23, 0.84);
   border: 1px solid rgba(255, 255, 255, 0.12);
   text-align: center;
@@ -222,6 +222,56 @@ h1 {
   margin-top: 6px;
   color: var(--muted);
   font-size: 0.86rem;
+}
+
+.ranking-panel {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.ranking-title {
+  margin-bottom: 6px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.72rem;
+}
+
+.ranking-table th,
+.ranking-table td {
+  padding: 5px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.ranking-table th {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.ranking-table td {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.ranking-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.ranking-table .is-current td {
+  background: rgba(255, 204, 77, 0.16);
+  color: #fff4c2;
 }
 
 .controls {

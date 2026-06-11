@@ -1,9 +1,9 @@
-const CACHE_NAME = "tetromino-pocket-v5";
+const CACHE_NAME = "tetromino-pocket-v6";
 const ASSETS = [
   "./",
   "index.html",
-  "styles.css?v=3",
-  "app.js?v=3",
+  "styles.css?v=6",
+  "app.js?v=6",
   "manifest.webmanifest",
   "icons/icon.svg",
 ];
