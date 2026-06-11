@@ -557,6 +557,15 @@ function hideOverlay() {
 function bindTap(element, action, repeat = false) {
   let timer = null;
   let interval = null;
+  let lastPointerAction = 0;
+
+  const runAction = () => {
+    if (!state.running || state.gameOver) {
+      startGame();
+      return;
+    }
+    action();
+  };
 
   const clear = () => {
     element.classList.remove("is-pressed");
@@ -568,14 +577,21 @@ function bindTap(element, action, repeat = false) {
 
   element.addEventListener("pointerdown", (event) => {
     event.preventDefault();
-    element.setPointerCapture(event.pointerId);
+    lastPointerAction = performance.now();
+    if (element.setPointerCapture) element.setPointerCapture(event.pointerId);
     element.classList.add("is-pressed");
-    action();
+    runAction();
     if (repeat) {
       timer = window.setTimeout(() => {
-        interval = window.setInterval(action, 72);
+        interval = window.setInterval(runAction, 72);
       }, 190);
     }
+  });
+
+  element.addEventListener("click", (event) => {
+    if (performance.now() - lastPointerAction < 350) return;
+    event.preventDefault();
+    runAction();
   });
 
   element.addEventListener("pointerup", clear);
