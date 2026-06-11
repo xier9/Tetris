@@ -1,0 +1,19 @@
+{
+  "name": "方塊下落",
+  "short_name": "方塊下落",
+  "description": "A small offline tetromino puzzle game for iPhone.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

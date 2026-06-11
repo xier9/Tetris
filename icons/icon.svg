@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="方塊下落 icon">
+  <rect width="512" height="512" rx="96" fill="#0d1117"/>
+  <g stroke="#0d1117" stroke-width="12" stroke-linejoin="round">
+    <path fill="#25d0ff" d="M116 116h70v70h-70zM186 116h70v70h-70zM256 116h70v70h-70zM326 116h70v70h-70z"/>
+    <path fill="#bd7bff" d="M186 202h70v70h-70zM116 272h70v70h-70zM186 272h70v70h-70zM256 272h70v70h-70z"/>
+    <path fill="#ffcc4d" d="M256 202h70v70h-70zM326 202h70v70h-70zM256 272h70v70h-70zM326 272h70v70h-70z"/>
+    <path fill="#55d187" d="M116 358h70v70h-70zM186 358h70v70h-70zM186 428h70v70h-70zM256 428h70v70h-70z"/>
+  </g>
+  <path d="M116 116h280v382H116z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="10"/>
+</svg>
