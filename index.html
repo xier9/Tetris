@@ -11,19 +11,11 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="icons/icon.svg" />
     <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
   <body>
     <main class="app" aria-label="方塊下落遊戲">
       <section class="hud" aria-label="遊戲資訊">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <div>
-            <h1>JRDN@俄羅斯方塊</h1>
-            <p>Classic tetromino puzzle</p>
-          </div>
-        </div>
-
         <div class="stats-grid" aria-live="polite">
           <div class="stat">
             <span>分數</span>
@@ -69,8 +61,8 @@
 
       <section class="controls" aria-label="觸控操作">
         <div class="control-bank function-bank" aria-label="左手功能鍵">
-          <button class="control" id="rotateBtn" type="button" aria-label="旋轉">↻</button>
           <button class="control tall" id="dropBtn" type="button" aria-label="瞬間落下">DROP</button>
+          <button class="control" id="rotateBtn" type="button" aria-label="旋轉">↻</button>
           <button class="control" id="holdBtn" type="button" aria-label="保留">HOLD</button>
           <button class="control" id="restartBtn" type="button" aria-label="重新開始">NEW</button>
         </div>
@@ -81,8 +73,16 @@
           <button class="control" id="pauseBtn" type="button" aria-label="暫停">PAUSE</button>
         </div>
       </section>
+
+      <footer class="brand footer-brand" aria-label="遊戲名稱">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1>JRDN@俄羅斯方塊</h1>
+          <p>Classic tetromino puzzle</p>
+        </div>
+      </footer>
     </main>
 
-    <script src="app.js?v=6" defer></script>
+    <script src="app.js?v=7" defer></script>
   </body>
 </html>
